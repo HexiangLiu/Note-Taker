@@ -5,7 +5,7 @@ const { v4: uuidv4 } = require('uuid');
 const fs = require('fs');
 const util = require('util');
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 const readFileAsync = util.promisify(fs.readFile);
 const writeFileAysnc = util.promisify(fs.writeFile);
@@ -44,7 +44,6 @@ app.post('/api/notes', async (req, res) => {
 });
 
 app.delete('/api/notes/:id', async (req, res) => {
-  
   const id = req.params.id;
 
   let notes = await readFileAsync('./db/db.json', 'utf8');
